@@ -1,4 +1,4 @@
-/* .hero-section{
+.hero-section{
     background-image: url('../../assets/blog-bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -32,4 +32,4 @@
     border: none;
     color: var(--color-text);
     cursor: pointer;
-} */
+}
