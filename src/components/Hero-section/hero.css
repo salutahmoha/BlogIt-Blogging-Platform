@@ -1,0 +1,35 @@
+/* .hero-section{
+    background-image: url('../../assets/blog-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 53rem;
+    object-fit: cover;
+    width: 100%;
+}
+.hero-text{
+    text-align: center;
+    color: var(--color-text);
+    padding-top: 14rem;
+}
+.hero-text h1{
+    font-size: 4rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+.call-to-action{
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 3rem;
+}
+.btn1{
+    border-radius: 5rem;
+    padding: 1rem 2rem;
+    background: rgb(24, 202, 24);
+    font-size: 1.7rem;
+    font-weight: 600;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+} */
