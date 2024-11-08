@@ -140,25 +140,25 @@
 //     }                                                                                                                                               
 // }
 
-// // update personal information
-// export async function updatePersonalInformation(req, res) {
-//     try {
-//         const { firstName, lastName, emailAddress, username } = req.body;
-//         const userId = req.userId;
+// update personal information
+export async function updatePersonalInformation(req, res) {
+    try {
+        const { firstName, lastName, emailAddress, username } = req.body;
+        const userId = req.userId;
 
-//         const user = await prisma.user.update({
-//             where: { id: userId },
-//             data: {
-//                 firstName,
-//                 lastName,
-//                 emailAddress,
-//                 username
-//             }
-//         });
+        const user = await prisma.user.update({
+            where: { id: userId },
+            data: {
+                firstName,
+                lastName,
+                emailAddress,
+                username
+            }
+        });
 
-//         res.status(200).json(user);
-//     } catch (e) {
-//         console.error("Error updating user information:", e.message, e.stack);
-//         res.status(500).json({ message: "Something went wrong" });
-//     }
-// }
+        res.status(200).json(user);
+    } catch (e) {
+        console.error("Error updating user information:", e.message, e.stack);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+}
