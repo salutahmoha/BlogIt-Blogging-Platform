@@ -98,24 +98,24 @@
 //     }
 // }
 
-// // delete blog
+// delete blog
 
-// export async function deleteBlog(req, res) {
-//     try {
-//         const {blogId} = req.params;
-//         const userId = req.userId;
+export async function deleteBlog(req, res) {
+    try {
+        const {blogId} = req.params;
+        const userId = req.userId;
 
-//         await prisma.blog.delete({
-//             where: {
-//                 id: blogId,
-//                 owner: userId
-//             }
-//         })
-//         res.status(200).json({message: "Blog deleted successfully"});
-//     }catch (e) {
-//         res.status(500).json({ message: "Something went wrong" });
-//     }
-// }
+        await prisma.blog.delete({
+            where: {
+                id: blogId,
+                owner: userId
+            }
+        })
+        res.status(200).json({message: "Blog deleted successfully"});
+    }catch (e) {
+        res.status(500).json({ message: "Something went wrong" });
+    }
+}
 
 // update blog
 export async function updateBlog(req, res) {
