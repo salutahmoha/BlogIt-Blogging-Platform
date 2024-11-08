@@ -117,28 +117,28 @@
 //     }
 // }
 
-// // update blog
-// export async function updateBlog(req, res) {
-//     try {
-//         const { blogId } = req.params;
-//         const { title, excerpt, body } = req.body;
-//         const userId = req.userId;
-//         const blog = await prisma.blog.update({
-//             where: {
-//                 id: blogId,
-//                 owner: userId
-//             },
-//             data: {
-//                 title,
-//                 excerpt,
-//                 body
-//             }
-//         })
-//         res.status(200).json(blog);
-//     }catch (e) {
-//       res.status(500).json({ message: "Something went wrong" });  
-//     }                                                                                                                                               
-// }
+// update blog
+export async function updateBlog(req, res) {
+    try {
+        const { blogId } = req.params;
+        const { title, excerpt, body } = req.body;
+        const userId = req.userId;
+        const blog = await prisma.blog.update({
+            where: {
+                id: blogId,
+                owner: userId
+            },
+            data: {
+                title,
+                excerpt,
+                body
+            }
+        })
+        res.status(200).json(blog);
+    }catch (e) {
+      res.status(500).json({ message: "Something went wrong" });  
+    }                                                                                                                                               
+}
 
 // update personal information
 export async function updatePersonalInformation(req, res) {
