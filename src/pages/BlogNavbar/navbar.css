@@ -1,4 +1,4 @@
-/* .nav-listings ul{
+.nav-listings ul{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,4 +27,4 @@ li:hover{
 
 .logout{
     padding: 0rem 2rem;
-} */
+}
