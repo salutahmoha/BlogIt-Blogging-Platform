@@ -1,4 +1,4 @@
-/* .update-personal-info-container{
+.update-personal-info-container{
     width: 100%;
 }
 
@@ -33,4 +33,4 @@ input{
 input::placeholder{
     font-size: 1.5rem;
     padding-top: 1rem;
-} */
+}
