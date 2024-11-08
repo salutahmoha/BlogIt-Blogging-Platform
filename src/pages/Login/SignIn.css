@@ -1,4 +1,4 @@
-/* .signin-container{
+.signin-container{
     height: 91vh;
     background-size: cover;
     background: var(--color-bg);
@@ -42,4 +42,4 @@ h3{
     display: flex;
     justify-content: center;
     align-items: center;
-} */
+}
