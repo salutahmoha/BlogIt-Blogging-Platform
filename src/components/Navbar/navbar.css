@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+html{
+    font-size: 62.5%;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .8rem 3rem;
+    border: 1px solid black;
+}
+
+h3{
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+.btn{
+    padding: .5rem 2rem;
+    font-size: 1.7rem;
+    cursor: pointer;
+}
