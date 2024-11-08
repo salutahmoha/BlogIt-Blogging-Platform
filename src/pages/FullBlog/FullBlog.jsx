@@ -14,17 +14,15 @@ function FullBlog() {
             if (!id) {
                 throw new Error('Blog ID is undefined');
             }
-            
-            const response = await fetch(`${apiBase}/blogs/${id}`, { credentials: "include" }); // Fetching using dynamic ID
+
+            const response = await fetch(`${apiBase}/blogs/${id}`, { credentials: "include" });
             if (!response.ok) {
                 const error = await response.json();
                 throw new Error(error.message);
             }
             return await response.json();
-        },
-        queryKey: ['blog', id],
+        }
     });
-    
 
     if (isLoading) {
         return <h2>Loading, please wait...</h2>;
@@ -39,12 +37,12 @@ function FullBlog() {
             <Navbar />
             <div className="full-blog">
                 <div className='full-header'>
-                <div className='author'>
-                <p>Author: {data.user.firstName} {data.user.lastName}</p>
-                <p>Email: {data.user.emailAddress}</p>
-                <p>Last Updated: {new Date(data.updatedAt).toLocaleDateString()}</p>
-                </div>
-                <div className='image'><img src={data.image} /></div>
+                    <div className='author'>
+                        <p>Author: {data.user.firstName} {data.user.lastName}</p>
+                        <p>Email: {data.user.emailAddress}</p>
+                        <p>Last Updated: {new Date(data.updatedAt).toLocaleDateString()}</p>
+                    </div>
+                    <div className='image'><img src={data.image} alt="Blog" /></div>
                 </div>
                 <h2 className='full-title'>{data.title}</h2>
                 <p className='full-excerpt'>{data.excerpt}</p>
