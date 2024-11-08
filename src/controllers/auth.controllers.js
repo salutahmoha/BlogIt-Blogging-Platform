@@ -38,14 +38,14 @@
 //     }
 // }
 
-// export async function logoutUser(req, res) {
-//     try {
-//         res.clearCookie("authToken", { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-//         res.status(200).json({ message: "Logout successful" });
-//     } catch (error) {
-//         res.status(500).json("Something went wrong during logout");
-//     }
-// }
+export async function logoutUser(req, res) {
+    try {
+        res.clearCookie("authToken", { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+        res.status(200).json({ message: "Logout successful" });
+    } catch (error) {
+        res.status(500).json("Something went wrong during logout");
+    }
+}
 
 
 
