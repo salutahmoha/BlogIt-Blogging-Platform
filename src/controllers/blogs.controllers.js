@@ -68,18 +68,18 @@
 // }
 
 
-// export async function fetchingAllBlogs(req, res) {
-//     try{
-//         const blogs = await prisma.blog.findMany({
-//             include: {
-//                 user: true 
-//             }
-//         });
-//         res.status(200).json(blogs);
-//     }catch(e){
-//         res.status(500).json({ message: "Something went wrong" });
-//     }
-// }
+export async function fetchingAllBlogs(req, res) {
+    try{
+        const blogs = await prisma.blog.findMany({
+            include: {
+                user: true 
+            }
+        });
+        res.status(200).json(blogs);
+    }catch(e){
+        res.status(500).json({ message: "Something went wrong" });
+    }
+}
 
 export async function getUserBlogs(req, res){
     try{
