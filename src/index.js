@@ -21,38 +21,38 @@
 
 // app.use(cookierParser());
 // const client = new PrismaClient();
-// app.post("/users", async (req, res) => {
-//     try {
-//         const { firstName, lastName, emailAddress, username, password } = req.body;
+app.post("/users", async (req, res) => {
+    try {
+        const { firstName, lastName, emailAddress, username, password } = req.body;
 
-//         const UserWithEmail = await client.user.findFirst({
-//             where: { emailAddress: emailAddress }
-//         });
-//         if (UserWithEmail) {
-//             return res.status(400).json("Email has already been taken" );
-//         }
-//         const UserWithUsername = await client.user.findFirst({
-//             where: { username: username }
-//         });
-//         if (UserWithUsername) {
-//             return res.status(400).json("Username has already been taken" );
-//         }
-//         const hashedPassword = await bcrypt.hash(password, 8);
+        const UserWithEmail = await client.user.findFirst({
+            where: { emailAddress: emailAddress }
+        });
+        if (UserWithEmail) {
+            return res.status(400).json("Email has already been taken" );
+        }
+        const UserWithUsername = await client.user.findFirst({
+            where: { username: username }
+        });
+        if (UserWithUsername) {
+            return res.status(400).json("Username has already been taken" );
+        }
+        const hashedPassword = await bcrypt.hash(password, 8);
 
-//         const newUser = await client.user.create({
-//             data: {
-//                 firstName,
-//                 lastName,
-//                 emailAddress,
-//                 username,
-//                 password: hashedPassword
-//             }
-//         });
-//         res.status(201).json(newUser);
-//     } catch (e) {
-//         res.status(500).json( "Something went wrong" );
-//     }
-// });
+        const newUser = await client.user.create({
+            data: {
+                firstName,
+                lastName,
+                emailAddress,
+                username,
+                password: hashedPassword
+            }
+        });
+        res.status(201).json(newUser);
+    } catch (e) {
+        res.status(500).json( "Something went wrong" );
+    }
+});
 
 // app.post("/auth/login", loginUser);
 // // logout
