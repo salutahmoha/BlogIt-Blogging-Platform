@@ -1,0 +1,45 @@
+/* .signin-container{
+    height: 91vh;
+    background-size: cover;
+    background: var(--color-bg);
+    background-size: cover;
+    padding-top: 4rem;
+}
+
+.signin-form{
+    margin-top: 10rem;
+}
+
+h3{
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--color-btn);
+    font-weight: 600;
+    padding-bottom: 1rem;
+     
+}
+.toast-success {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    border-radius: .8rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    max-width: 30rem;
+}
+
+.toast-error {
+    background-color: #F44336;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: .8rem;
+    padding: 1rem 1.5rem;
+    max-width: 30rem;
+}
+
+.login-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */

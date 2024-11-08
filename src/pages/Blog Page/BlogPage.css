@@ -1,0 +1,37 @@
+.blogs{
+    margin: 2rem;
+}
+
+.blogs-page{
+    width: 20rem;
+    height: 25rem;
+    border: 1px solid var(--color-border);
+}
+
+.blogs-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem ;
+}
+
+.update, .delete{
+    background: var(--color-btn);
+    border: none;
+    padding: .5rem 1rem;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.create-new-blog{
+    background: var(--color-btn);
+    border: none;
+    padding: .5rem 1rem;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 2rem auto;
+}

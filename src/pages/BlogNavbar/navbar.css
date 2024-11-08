@@ -1,0 +1,30 @@
+/* .nav-listings ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    text-decoration: none;
+}
+
+.nav-listings a{
+    text-decoration: none;
+}
+li{
+    font-size: 1.8rem;
+    list-style: none;
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s ease-in-out; 
+}
+
+li:hover{
+    color: var(--color-btn);
+    transition: all ease .5s;
+
+}
+
+.logout{
+    padding: 0rem 2rem;
+} */
