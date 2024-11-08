@@ -81,22 +81,22 @@
 //     }
 // }
 
-// export async function getUserBlogs(req, res){
-//     try{
-//         const userId = req.userId;
-//         const userBlogs = await prisma.blog.findMany({
-//             where: {
-//                 owner: userId
-//             },
-//             include: {
-//                 user: true 
-//             }
-//         });
-//         res.status(200).json(userBlogs);
-//     }catch(e){
-//         res.status(400).json({ message: "Something went wrong please try again"})
-//     }
-// }
+export async function getUserBlogs(req, res){
+    try{
+        const userId = req.userId;
+        const userBlogs = await prisma.blog.findMany({
+            where: {
+                owner: userId
+            },
+            include: {
+                user: true 
+            }
+        });
+        res.status(200).json(userBlogs);
+    }catch(e){
+        res.status(400).json({ message: "Something went wrong please try again"})
+    }
+}
 
 // delete blog
 
