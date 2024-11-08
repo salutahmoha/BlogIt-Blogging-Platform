@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+node_modules
+# Keep environment variables out of version control
+.env
+=======
 # Logs
 logs
 *.log
@@ -23,3 +28,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+>>>>>>> 21ee0ad221028c4676dbaf3301a0f65b0898ccc6
