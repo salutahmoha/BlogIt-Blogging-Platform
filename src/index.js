@@ -1,26 +1,26 @@
-// import express from 'express';
-// import bcrypt from 'bcryptjs';
-// import { PrismaClient } from '@prisma/client';
-// import { loginUser, updatePassword , logoutUser} from './controllers/auth.controllers.js';
-// import { createBlog, fetchingSingleBlog, fetchingAllBlogs, getUserBlogs, deleteBlog, updateBlog, updatePersonalInformation } from './controllers/blogs.controllers.js';
-// import verifyToken  from './middleware/verifyToken.js';
-// import cookierParser from 'cookie-parser';
-// import jwt from 'jsonwebtoken';
-// import validateBlog from './middleware/validateBlog.js';
-// import cors from 'cors';
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import { PrismaClient } from '@prisma/client';
+import { loginUser, updatePassword , logoutUser} from './controllers/auth.controllers.js';
+import { createBlog, fetchingSingleBlog, fetchingAllBlogs, getUserBlogs, deleteBlog, updateBlog, updatePersonalInformation } from './controllers/blogs.controllers.js';
+import verifyToken  from './middleware/verifyToken.js';
+import cookierParser from 'cookie-parser';
+import jwt from 'jsonwebtoken';
+import validateBlog from './middleware/validateBlog.js';
+import cors from 'cors';
 
-// const app = express();
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// app.use(cors({
-//     origin: "http://localhost:5173", 
-//     methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
-//     credentials: true
-// }));
+app.use(cors({
+    origin: "http://localhost:5173", 
+    methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
+    credentials: true
+}));
 
-// app.use(cookierParser());
-// const client = new PrismaClient();
+app.use(cookierParser());
+const client = new PrismaClient();
 app.post("/users", async (req, res) => {
     try {
         const { firstName, lastName, emailAddress, username, password } = req.body;
@@ -54,17 +54,17 @@ app.post("/users", async (req, res) => {
     }
 });
 
-// app.post("/auth/login", loginUser);
-// // logout
-// app.post("/user/logout", logoutUser);
-// app.put("/users", verifyToken, updatePersonalInformation);
-// app.patch("/auth/password", verifyToken, updatePassword);
-// app.post("/blogs", verifyToken, validateBlog, createBlog);
-// app.get("/blogs/user", verifyToken, getUserBlogs);
-// app.get("/blogs/:id", verifyToken, fetchingSingleBlog);
-// app.get("/blogs", verifyToken, fetchingAllBlogs);
-// app.delete("/blogs/:blogId", verifyToken, deleteBlog);
-// app.put("/blogs/:blogId", verifyToken, validateBlog, updateBlog);
+app.post("/auth/login", loginUser);
+// logout
+app.post("/user/logout", logoutUser);
+app.put("/users", verifyToken, updatePersonalInformation);
+app.patch("/auth/password", verifyToken, updatePassword);
+app.post("/blogs", verifyToken, validateBlog, createBlog);
+app.get("/blogs/user", verifyToken, getUserBlogs);
+app.get("/blogs/:id", verifyToken, fetchingSingleBlog);
+app.get("/blogs", verifyToken, fetchingAllBlogs);
+app.delete("/blogs/:blogId", verifyToken, deleteBlog);
+app.put("/blogs/:blogId", verifyToken, validateBlog, updateBlog);
 
 
-// app.listen(4000, () => console.log("Server running on http://localhost:4000"));
+app.listen(4000, () => console.log("Server running on http://localhost:4000"));
