@@ -1,4 +1,4 @@
-/* .personal-blog-list {
+.personal-blog-list {
     display: flex;
     flex-wrap: wrap;
     gap: 5rem;
@@ -33,4 +33,4 @@
     font-weight: 600;
     text-decoration: none;
     padding-left: 1rem;
-} */
+}
