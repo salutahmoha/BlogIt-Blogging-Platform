@@ -43,29 +43,29 @@
 
 
 
-// export async function fetchingSingleBlog(req, res) {
-//     try {
-//         const { id } = req.params;
+export async function fetchingSingleBlog(req, res) {
+    try {
+        const { id } = req.params;
 
-//         const blog = await prisma.blog.findFirst({
-//             where: {
-//                 id
-//             },
-//             include: {
-//                 user: true 
-//             }
-//         });
+        const blog = await prisma.blog.findFirst({
+            where: {
+                id
+            },
+            include: {
+                user: true 
+            }
+        });
 
-//         if (!blog) {
-//             return res.status(404).json({ message: "Blog not found" });
-//         }
+        if (!blog) {
+            return res.status(404).json({ message: "Blog not found" });
+        }
 
-//         res.status(200).json(blog);
-//     } catch (e) {
-//         console.error("Error fetching blog:", e);
-//         res.status(500).json({ message: "Something went wrong" });
-//     }
-// }
+        res.status(200).json(blog);
+    } catch (e) {
+        console.error("Error fetching blog:", e);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+}
 
 
 export async function fetchingAllBlogs(req, res) {
