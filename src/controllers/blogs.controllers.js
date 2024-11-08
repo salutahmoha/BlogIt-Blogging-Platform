@@ -1,45 +1,45 @@
-// import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
-// export async function createBlog(req, res) {
-//     try {
-//         const { title, excerpt, body, image } = req.body;
+export async function createBlog(req, res) {
+    try {
+        const { title, excerpt, body, image } = req.body;
 
-//         if (!title) {
-//             return res.status(400).json({ message: "Title is required" });
-//         }
-//         if (!excerpt) {
-//             return res.status(400).json({ message: "Excerpt is required" });
-//         }
-//         if (!body) {
-//             return res.status(400).json({ message: "Body is required" });
-//         }
+        if (!title) {
+            return res.status(400).json({ message: "Title is required" });
+        }
+        if (!excerpt) {
+            return res.status(400).json({ message: "Excerpt is required" });
+        }
+        if (!body) {
+            return res.status(400).json({ message: "Body is required" });
+        }
 
-//         const userId = req.userId;
-//         if (!userId) {
-//             return res.status(401).json({ message: "User not authenticated" });
-//         }
+        const userId = req.userId;
+        if (!userId) {
+            return res.status(401).json({ message: "User not authenticated" });
+        }
 
-//         // Use a default avatar if no image is provided
-//         const imageUrl = image || 'https://example.com/default-avatar.png';
+        // Use a default avatar if no image is provided
+        const imageUrl = image || 'https://example.com/default-avatar.png';
 
-//         const newBlog = await prisma.blog.create({
-//             data: {
-//                 title,
-//                 excerpt,
-//                 body,
-//                 image: imageUrl,
-//                 owner: userId,
-//             }
-//         });
+        const newBlog = await prisma.blog.create({
+            data: {
+                title,
+                excerpt,
+                body,
+                image: imageUrl,
+                owner: userId,
+            }
+        });
 
-//         res.status(201).json(newBlog);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ message: error.message});
-//     }
-// }
+        res.status(201).json(newBlog);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error.message});
+    }
+}
 
 
 
