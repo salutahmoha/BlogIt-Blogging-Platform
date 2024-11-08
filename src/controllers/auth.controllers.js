@@ -1,42 +1,42 @@
-// import bcrypt from 'bcryptjs';
-// import jwt from 'jsonwebtoken';
-// import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { PrismaClient } from '@prisma/client';
 
-// const client = new PrismaClient();
+const client = new PrismaClient();
 
-// export async function loginUser(req, res) {
-//     try {
-//         const identifier = req.body.identifier;
-//         const password = req.body.password;
+export async function loginUser(req, res) {
+    try {
+        const identifier = req.body.identifier;
+        const password = req.body.password;
 
-//         const user = await client.user.findFirst({
-//             where: {
-//                 OR: [
-//                     { emailAddress: identifier },
-//                     { username: identifier }
-//                 ]
-//             }
-//         });
+        const user = await client.user.findFirst({
+            where: {
+                OR: [
+                    { emailAddress: identifier },
+                    { username: identifier }
+                ]
+            }
+        });
 
-//         if (!user) {
-//             return res.status(401).json("Wrong email/username or password");
-//         }
+        if (!user) {
+            return res.status(401).json("Wrong email/username or password");
+        }
 
-//         const passwordsMatch = await bcrypt.compare(password, user.password);
-//         if (!passwordsMatch) {
-//             return res.status(401).json("Wrong email/username or password");
-//         }
+        const passwordsMatch = await bcrypt.compare(password, user.password);
+        if (!passwordsMatch) {
+            return res.status(401).json("Wrong email/username or password");
+        }
 
-//         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-//         res.status(200)
-//             .cookie("authToken", token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
-//             .json(user);
-//     } catch (e) {
-//         // console.error("Login error:", e);
-//         res.status(500).json("Something went wrong");
-//     }
-// }
+        res.status(200)
+            .cookie("authToken", token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
+            .json(user);
+    } catch (e) {
+        // console.error("Login error:", e);
+        res.status(500).json("Something went wrong");
+    }
+}
 
 export async function logoutUser(req, res) {
     try {
