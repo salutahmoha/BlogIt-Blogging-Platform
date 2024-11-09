@@ -162,3 +162,50 @@ export async function updatePersonalInformation(req, res) {
         res.status(500).json({ message: "Something went wrong" });
     }
 }
+
+// create profile
+export async function createProfile(req, res) {
+    try {
+        const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
+
+        // Validate required fields
+        if (!phoneNumber) return res.status(400).json({ message: "phoneNumber is required" });
+        if (!occupation) return res.status(400).json({ message: "occupation is required" });
+        if (!bio) return res.status(400).json({ message: "Bio is required" });
+        if (!secondaryEmail) return res.status(400).json({ message: "secondaryEmail is required" });
+
+        // Check if the user is authenticated
+        const userId = req.userId;
+        if (!userId) return res.status(401).json({ message: "User not authenticated" });
+
+        // Ensure the secondaryEmail is unique across all profiles
+        const existingProfileWithSecondaryEmail = await prisma.profile.findUnique({
+            where: { secondaryEmail },
+        });
+        if (existingProfileWithSecondaryEmail) {
+            return res.status(409).json({ message: "Secondary email has already been taken" });
+        }
+
+        // Use a default avatar if no image is provided
+        const imageUrl = profileImage || 'https://example.com/default-avatar.png';
+
+        // Create a new profile in the database
+        const newProfile = await prisma.profile.create({
+            data: {
+                phoneNumber,
+                occupation,
+                bio,
+                secondaryEmail,
+                profileImage: imageUrl,
+                user: {
+                    connect: { id: userId }  // Ensure this connects the profile to the authenticated user
+                }
+            },
+        });
+
+        res.status(201).json(newProfile);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
+    }
+}

@@ -20,6 +20,7 @@ model User {
   emailAddress String @unique
   username     String @unique
   password     String
+  profile      Profile? @relation 
   blogs        Blog[]
 
   @@map("users")
@@ -37,4 +38,18 @@ model Blog {
   user      User     @relation(fields: [owner], references: [id])
 
   @@map("blogs")
+}
+
+model Profile {
+  id            Int      @id @default(autoincrement())
+  userId        String   @unique
+  phoneNumber   String
+  occupation    String
+  bio           String
+  secondaryEmail String  @unique
+  profileImage  String?
+
+  user          User     @relation(fields: [userId], references: [id])
+
+  @@map("profiles")
 }
