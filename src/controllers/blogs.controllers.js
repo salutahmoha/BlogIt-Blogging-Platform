@@ -231,33 +231,33 @@ export  async function  getUserProfie(req, res) {
     }
 };
 
-// // update profile
-// export async function updateProfile(req, res) {
-//     try {
-//         const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
-//         const userId = req.userId;
+// update profile
+export async function updateProfile(req, res) {
+    try {
+        const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
+        const userId = req.userId;
 
-//         // Check if profile exists
-//         const existingProfile = await prisma.profile.findUnique({ where: { userId } });
-//         if (!existingProfile) {
-//             return res.status(404).json({ message: "Profile not found. Please create a profile first." });
-//         }
+        // Check if profile exists
+        const existingProfile = await prisma.profile.findUnique({ where: { userId } });
+        if (!existingProfile) {
+            return res.status(404).json({ message: "Profile not found. Please create a profile first." });
+        }
 
-//         // Update profile with new data
-//         const updatedProfile = await prisma.profile.update({
-//             where: { userId },
-//             data: {
-//                 phoneNumber,
-//                 occupation,
-//                 bio,
-//                 secondaryEmail,
-//                 profileImage,
-//             },
-//         });
+        // Update profile with new data
+        const updatedProfile = await prisma.profile.update({
+            where: { userId },
+            data: {
+                phoneNumber,
+                occupation,
+                bio,
+                secondaryEmail,
+                profileImage,
+            },
+        });
 
-//         res.status(200).json(updatedProfile);
-//     } catch (error) {
-//         console.error("Error updating profile:", error);
-//         res.status(500).json({ message: "An error occurred while updating the profile." });
-//     }
-// };
+        res.status(200).json(updatedProfile);
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        res.status(500).json({ message: "An error occurred while updating the profile." });
+    }
+};
