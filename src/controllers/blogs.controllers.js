@@ -209,3 +209,55 @@ export async function createProfile(req, res) {
         res.status(500).json({ message: error.message });
     }
 }
+
+// Getting profile for  logged in user
+export  async function  getUserProfie(req, res) {
+    try {
+        const userId = req.userId;  // Assuming verifyToken sets req.userId
+
+        // Fetch profile based on the authenticated user's ID
+        const profile = await prisma.profile.findUnique({
+            where: { userId },
+        });
+
+        if (!profile) {
+            return res.status(404).json({ message: "Profile not found" });
+        }
+
+        res.status(200).json(profile);
+    } catch (error) {
+        console.error("Error fetching profile:", error);
+        res.status(500).json({ message: "An error occurred while fetching the profile." });
+    }
+};
+
+// // update profile
+// export async function updateProfile(req, res) {
+//     try {
+//         const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
+//         const userId = req.userId;
+
+//         // Check if profile exists
+//         const existingProfile = await prisma.profile.findUnique({ where: { userId } });
+//         if (!existingProfile) {
+//             return res.status(404).json({ message: "Profile not found. Please create a profile first." });
+//         }
+
+//         // Update profile with new data
+//         const updatedProfile = await prisma.profile.update({
+//             where: { userId },
+//             data: {
+//                 phoneNumber,
+//                 occupation,
+//                 bio,
+//                 secondaryEmail,
+//                 profileImage,
+//             },
+//         });
+
+//         res.status(200).json(updatedProfile);
+//     } catch (error) {
+//         console.error("Error updating profile:", error);
+//         res.status(500).json({ message: "An error occurred while updating the profile." });
+//     }
+// };

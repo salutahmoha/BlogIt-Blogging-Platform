@@ -2,7 +2,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
 import { loginUser, updatePassword , logoutUser} from './controllers/auth.controllers.js';
-import { createBlog, fetchingSingleBlog, fetchingAllBlogs, getUserBlogs, deleteBlog, updateBlog, updatePersonalInformation, createProfile } from './controllers/blogs.controllers.js';
+import { createBlog, fetchingSingleBlog, fetchingAllBlogs, getUserBlogs, deleteBlog, updateBlog, updatePersonalInformation, createProfile, getUserProfie, updateProfile } from './controllers/blogs.controllers.js';
 import verifyToken  from './middleware/verifyToken.js';
 import cookierParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
@@ -61,6 +61,8 @@ app.post("/auth/login", loginUser);
 // logout
 app.post("/user/logout", logoutUser);
 app.post("/profile", verifyToken, createProfile);
+app.get("/users/profile", verifyToken, getUserProfie);
+app.put("/users/profile", verifyToken, updateProfile);
 app.put("/users", verifyToken, updatePersonalInformation);
 app.patch("/auth/password", verifyToken, updatePassword);
 app.post("/blogs", verifyToken, validateBlog, createBlog);
