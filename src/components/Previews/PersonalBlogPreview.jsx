@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from 'react-query';
 import apiBase from '../../utils/apiBase';
 import toast from "react-simple-toasts";
 import "react-simple-toasts/dist/style.css";
-import './css/PersonalBlogsPreview.css';	
+import './css/PersonalBlogPreview.css';	
 function PersonalBlogPreview({ id, title, excerpt }) {
     const navigate = useNavigate();
     const queryClient = useQueryClient();

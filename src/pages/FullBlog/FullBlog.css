@@ -8,16 +8,15 @@
     text-align: justify;
 }
 .full-title{
-    font-size: 2rem;
+    font-size: 3rem;
     padding: 1rem auto;
 }
 
-
-.image img{
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
- 
+.blog-img img{
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    padding: 2rem 0;
 }
 
 .full-header{
@@ -25,4 +24,13 @@
     justify-content: space-between;
     align-items: center;
     padding-right: 8rem;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.image img{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
 }

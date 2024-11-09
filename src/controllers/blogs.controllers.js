@@ -162,3 +162,30 @@ export async function updatePersonalInformation(req, res) {
         res.status(500).json({ message: "Something went wrong" });
     }
 }
+
+// create profile
+export async function createProfile(req, res) {
+    try {
+        const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
+        if (!req.userId) {
+            return res.status(401).json({ message: "User not authenticated" });
+        }
+        const userId = req.userId;
+
+        const imageUrl = profileImage || 'https://example.com/default-avatar.png';
+        const newProfile = await prisma.profile.create({
+            data: {
+                userId,
+                phoneNumber,
+                occupation,
+                bio,
+                secondaryEmail,
+                profileImage: imageUrl,
+            }
+        });
+        res.status(201).json(newProfile);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "An error occurred while creating the profile." });
+    }
+}

@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './pages/Navbar/navbar';
 import HeroSection from './pages/Hero-section/hero';
-import RegisterUser from './pages/Registration/registerUser';
+import RegisterUser from './pages/Registration/RegisterUser';
+import ProfileUpdate from './components/Previews/ProfileUpdate';
 import SignIn from './pages/Login/SignIn';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import BlogListings from './pages/Blog/BlogListings';
@@ -12,7 +13,7 @@ import FullBlog from './pages/FullBlog/FullBlog';
 import BlogPreview from './components/Previews/BlogPreview';
 import PersonalBlogPreview from './components/Previews/PersonalBlogPreview';
 import PersonalBlogsPreview from './components/Previews/PersonalBlogsPreview';
-import Profile from './pages/Profile Page/profile';
+import Profile from './pages/Profile Page/Profile'
 import UpdatePersonaInformation from './components/Previews/UpdatePersonaInformation';
 import UpdatePassword from './components/Previews/UpdatePassword';
 import './App.css';
@@ -57,6 +58,7 @@ function Main() {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/UpdatePersonaInformation/:userId" element={<UpdatePersonaInformation />} />
         <Route path="/UpdatePassword/:userId" element={<UpdatePassword />} />
+        <Route path="/ProfileUpdate" element={<ProfileUpdate/>} />
       </Routes>
     </>
   );

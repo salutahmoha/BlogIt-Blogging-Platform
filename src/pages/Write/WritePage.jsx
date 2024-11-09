@@ -7,8 +7,8 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import apiBase from '../../utils/apiBase';
 import toast from 'react-simple-toasts';
-import './WritePage.css';
 import "react-simple-toasts/dist/style.css";
+import './WritePage.css';
 
 function WritePage() {
     const [title, setTitle] = useState("");
@@ -35,7 +35,7 @@ function WritePage() {
     // Define the mutation function for posting blog
     const { mutate, isLoading } = useMutation({
         mutationFn: async function (Blog) {
-            console.log("Sending data: ", Blog); // Log the data being sent
+            // console.log("Sending data: ", Blog); // Log the data being sent
             const response = await fetch(`${apiBase}/blogs`, {
                 method: 'POST',
                 body: JSON.stringify(Blog),
@@ -48,7 +48,6 @@ function WritePage() {
             
             if (!response.ok) {
                 const error = await response.json();
-                console.error("Error response: ", error);  // Log error from backend
                 throw new Error(error.message || "Something went wrong");
             }
             
