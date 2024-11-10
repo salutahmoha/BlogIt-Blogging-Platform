@@ -1,16 +1,36 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './css/BlogPreview.css';
+import apiBase from '../../utils/apiBase';
 
-function BlogPreview({ id, title, excerpt, body, author, image }) {
+function BlogPreview({ id, title, excerpt, body, author, image, authorId }) {
+  const [profileImage, setProfileImage] = useState(''); 
   const navigate = useNavigate();
 
-/*************  ✨ Codeium Command ⭐  *************/
-/******  0a8b32f9-dc91-46da-8b42-dd1147c95370  *******/
+  useEffect(() => {
+    const fetchAuthorData = async () => {
+      try {
+
+        const response = await fetch(`${apiBase}/users/profile`, { credentials: "include" });
+        if (response.ok) {
+          const user = await response.json();
+          setProfileImage(user.profileImage || "default-profile-image.jpg");
+        }
+      } catch (error) {
+        console.error('Error fetching author profile:', error);
+      }
+    };
+
+    if (authorId) {
+      fetchAuthorData();
+    }
+  }, [authorId]);
+
   function handleReadMore() {
     if (!id) return;
-    navigate(`/blogs/${id}`);
+
+  
+    navigate(`/blogs/${id}`, { state: { profileImage } });
   }
 
   return (
@@ -21,7 +41,10 @@ function BlogPreview({ id, title, excerpt, body, author, image }) {
         <p className="body" dangerouslySetInnerHTML={{ __html: body }}></p>
         <div className="blog-footer">
           <div className='author-details'>
-            <p className='blog-image'><img src={image} /></p>
+            {/* Display the author's profile image */}
+            <p className='blog-image'>
+              <img src={profileImage} alt="Author" />
+            </p>
             <p className="author">By {author}</p>
           </div>
           <button className="btn-readmore" onClick={handleReadMore}>Read more</button>

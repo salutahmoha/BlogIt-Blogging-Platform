@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../BlogNavbar/navbar';
 import { useQuery } from 'react-query';
 import apiBase from '../../utils/apiBase';
@@ -18,6 +17,27 @@ function BlogListings() {
     }
   });
 
+  const [profileImage, setProfileImage] = useState('');
+  const [currentUserId, setCurrentUserId] = useState(null);
+
+  // Fetch the logged-in user's profile image and user ID
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`${apiBase}/users/profile`, { credentials: "include" });
+        if (response.ok) {
+          const user = await response.json();
+          setCurrentUserId(user.id); // Store the current logged-in user's ID
+          setProfileImage(user.profileImage || "default-profile-image.jpg"); // Set profile image
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   if (isLoading) {
     return <h2>Loading, please wait...</h2>;
   }
@@ -34,13 +54,13 @@ function BlogListings() {
           <BlogPreview 
             key={i}
             author={`${blog.user.firstName} ${blog.user.lastName}`}
-            email={blog.email}
-            updatedAt={blog.updatedAt}
+            authorId={blog.user.id} // Pass the author's ID to BlogPreview
             title={blog.title}
             excerpt={blog.excerpt}
             body={blog.body}
             image={blog.image}
             id={blog.id}
+            profileImage={currentUserId === blog.user.id ? profileImage : blog.image} // Conditionally pass the profile image or blog image
           />
         ))}
       </div>

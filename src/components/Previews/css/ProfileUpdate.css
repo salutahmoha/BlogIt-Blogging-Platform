@@ -12,8 +12,10 @@
 input{
     width: 100%;
 }
-
-.btn-profle-update{
+textarea{
+    width: 100%;
+}
+.btn-profile-update{
     margin-top: 2rem;
     width: 100%;
     padding: 3rem auto;
@@ -25,4 +27,13 @@ input{
     cursor: pointer;
     color: #fff;
     font-weight: 600;
+}
+
+.profile-image{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 1rem 0;
+    object-fit: cover;
 }
