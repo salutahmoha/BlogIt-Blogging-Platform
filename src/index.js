@@ -60,7 +60,7 @@ app.post("/users", async (req, res) => {
 app.post("/auth/login", loginUser);
 // logout
 app.post("/user/logout", logoutUser);
-app.post("/profile", verifyToken, createProfile);
+app.post("/users/profile", verifyToken, createProfile);
 app.get("/users/profile", verifyToken, getUserProfie);
 app.put("/users/profile", verifyToken, updateProfile);
 app.put("/users", verifyToken, updatePersonalInformation);

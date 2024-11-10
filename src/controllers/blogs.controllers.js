@@ -237,27 +237,44 @@ export async function updateProfile(req, res) {
         const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
         const userId = req.userId;
 
-        // Check if profile exists
-        const existingProfile = await prisma.profile.findUnique({ where: { userId } });
-        if (!existingProfile) {
-            return res.status(404).json({ message: "Profile not found. Please create a profile first." });
+        // Ensure the user is authenticated
+        if (!userId) return res.status(401).json({ message: "User not authenticated" });
+
+        // Get the current profile
+        const currentProfile = await prisma.profile.findUnique({
+            where: { userId }
+        });
+
+        // Check if secondaryEmail is being updated
+        if (secondaryEmail && secondaryEmail !== currentProfile.secondaryEmail) {
+            // Check if the new secondaryEmail already exists in the system
+            const existingProfileWithSecondaryEmail = await prisma.profile.findUnique({
+                where: { secondaryEmail },
+            });
+
+            if (existingProfileWithSecondaryEmail) {
+                return res.status(409).json({ message: "Secondary email has already been taken" });
+            }
         }
 
-        // Update profile with new data
+        // Use a default avatar if no image is provided
+        const imageUrl = profileImage || currentProfile.profileImage || 'https://example.com/default-avatar.png';
+
+        // Update the profile
         const updatedProfile = await prisma.profile.update({
             where: { userId },
             data: {
                 phoneNumber,
                 occupation,
                 bio,
-                secondaryEmail,
-                profileImage,
+                secondaryEmail: secondaryEmail || currentProfile.secondaryEmail, // Only update if provided
+                profileImage: imageUrl,
             },
         });
 
         res.status(200).json(updatedProfile);
     } catch (error) {
-        console.error("Error updating profile:", error);
-        res.status(500).json({ message: "An error occurred while updating the profile." });
+        console.error(error);
+        res.status(500).json({ message: error.message });
     }
-};
+}
