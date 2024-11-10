@@ -1,0 +1,36 @@
+.personal-blog-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
+    justify-content: center;
+}
+
+.personal-blog-container {
+    flex: 1 1 25rem;
+    max-width: 34rem;
+    box-sizing: border-box;
+    margin: 0 8px;
+}
+
+
+.personal-blog-title{
+    text-align: center;
+    font-size: 4rem;
+    text-transform: capitalize;
+}
+
+.create-personalblog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0;
+}
+
+.create-blog{
+    color: blue;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding-left: 1rem;
+}

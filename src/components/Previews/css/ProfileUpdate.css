@@ -1,0 +1,39 @@
+.profileupdate-container{
+    width: 100%;
+}
+
+.profile-form{
+    width: 70%;
+    background: var(--color-bg);
+    margin: 5rem auto;
+    padding: 3rem;
+}
+
+input{
+    width: 100%;
+}
+textarea{
+    width: 100%;
+}
+.btn-profile-update{
+    margin-top: 2rem;
+    width: 100%;
+    padding: 3rem auto;
+    font-size: 2rem;
+    background: var(--color-btn);
+    border: none;
+    height: 3rem;
+    border-radius: .4rem;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+}
+
+.profile-image{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 1rem 0;
+    object-fit: cover;
+}

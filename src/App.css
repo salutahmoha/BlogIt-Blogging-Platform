@@ -10,4 +10,8 @@ html {
 }
 :root {
   --color-text: #ffffff;
+  --color-border: #000;
+  --color-btn: #18ca18;
+  --color-bg: #d3efd3;
+  --color-white: #fff;
 }

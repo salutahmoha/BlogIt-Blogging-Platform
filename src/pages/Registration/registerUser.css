@@ -1,0 +1,68 @@
+
+.register{
+    background-size: cover;
+    background: var(--color-bg);
+    background-size: cover;
+    padding-top: 4rem;
+    width: 100%;
+}
+
+.form{  
+    width: 60%;
+    margin: 0rem auto;
+    padding: 2rem 3rem;
+    border-radius: 3px;
+    background: #fff;
+}
+label{
+    display: flex;
+    font-size: 2rem;
+    padding-bottom: .5rem;
+    font-weight: 600;
+}
+
+input{
+    width: 85%;
+    height: 3.3rem;
+    padding-bottom: 1rem;
+}
+input::placeholder{
+    padding: auto 1rem;
+}
+input:focus{
+    outline: none;
+}
+
+.create-account{
+    width: 100%;
+    background: var(--color-btn);
+    padding: .7rem 2rem;
+    color: var(--color-text);
+    border: none;
+    border-radius: .3rem;
+    font-size: 1.7rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.login-button p{
+    font-size: 2.5rem;
+    padding-top: 1rem;
+}
+
+.btn-register-login{
+    border: none;
+    background: none;
+    color: var(--color-btn);
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 500;
+}
+

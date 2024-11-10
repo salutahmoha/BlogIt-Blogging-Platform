@@ -1,11 +1,12 @@
 .hero-section{
-    background-image: url('../../assets/blog-bg.jpg');
+    background-image: url('../../assets/blog-background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
-    height: 53rem;
+    background-position: center center; 
+    height: 91vh;
+    
     object-fit: cover;
-    width: 100%;
+    max-width: 100%;
 }
 .hero-text{
     text-align: center;
@@ -26,7 +27,7 @@
 .btn1{
     border-radius: 5rem;
     padding: 1rem 2rem;
-    background: rgb(24, 202, 24);
+    background: var(--color-btn);
     font-size: 1.7rem;
     font-weight: 600;
     border: none;

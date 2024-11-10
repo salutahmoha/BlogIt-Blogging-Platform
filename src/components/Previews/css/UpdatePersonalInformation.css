@@ -1,0 +1,36 @@
+.update-personal-info-container{
+    width: 100%;
+}
+
+.update-personal-info{
+    width: 70%;
+    background: var(--color-bg);
+    margin: 5rem auto;
+    padding: 3rem;
+}
+
+input{
+    width: 100%;
+}
+.update-personal-info h3{
+    padding-bottom: 2rem;
+}
+
+.btn-update-info{
+    margin-top: 2rem;
+    width: 100%;
+    padding: 3rem auto;
+    font-size: 2rem;
+    background: var(--color-btn);
+    border: none;
+    height: 3rem;
+    border-radius: .4rem;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+}
+
+input::placeholder{
+    font-size: 1.5rem;
+    padding-top: 1rem;
+}
