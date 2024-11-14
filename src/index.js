@@ -2,7 +2,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
 import { loginUser, updatePassword , logoutUser} from './controllers/auth.controllers.js';
-import { createBlog, fetchingSingleBlog, fetchingAllBlogs, getUserBlogs, deleteBlog, updateBlog, updatePersonalInformation, createProfile, getUserProfie, updateProfile } from './controllers/blogs.controllers.js';
+import { createBlog, fetchingSingleBlog, fetchingAllBlogs, getUserBlogs, deleteBlog, updateBlog, updatePersonalInformation, createProfile, getUserProfie, updateProfile, fetchProfileImage } from './controllers/blogs.controllers.js';
 import verifyToken  from './middleware/verifyToken.js';
 import cookierParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
@@ -71,5 +71,8 @@ app.get("/blogs/:id", verifyToken, fetchingSingleBlog);
 app.get("/blogs", verifyToken, fetchingAllBlogs);
 app.delete("/blogs/:blogId", verifyToken, deleteBlog);
 app.put("/blogs/:blogId", verifyToken, validateBlog, updateBlog);
+
+// fetch profile image
+app.get("/users/:userId/profile", fetchProfileImage);
 
 app.listen(4000, () => console.log("Server running on http://localhost:4000"));

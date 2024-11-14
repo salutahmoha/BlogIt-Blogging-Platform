@@ -1,280 +1,302 @@
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
-export async function createBlog(req, res) {
-    try {
-        const { title, excerpt, body, image } = req.body;
+// export async function createBlog(req, res) {
+//     try {
+//         const { title, excerpt, body, image } = req.body;
 
-        if (!title) {
-            return res.status(400).json({ message: "Title is required" });
-        }
-        if (!excerpt) {
-            return res.status(400).json({ message: "Excerpt is required" });
-        }
-        if (!body) {
-            return res.status(400).json({ message: "Body is required" });
-        }
+//         if (!title) {
+//             return res.status(400).json({ message: "Title is required" });
+//         }
+//         if (!excerpt) {
+//             return res.status(400).json({ message: "Excerpt is required" });
+//         }
+//         if (!body) {
+//             return res.status(400).json({ message: "Body is required" });
+//         }
 
-        const userId = req.userId;
-        if (!userId) {
-            return res.status(401).json({ message: "User not authenticated" });
-        }
+//         const userId = req.userId;
+//         if (!userId) {
+//             return res.status(401).json({ message: "User not authenticated" });
+//         }
 
-        // Use a default avatar if no image is provided
-        const imageUrl = image || 'https://example.com/default-avatar.png';
+//         // Use a default avatar if no image is provided
+//         const imageUrl = image || 'https://example.com/default-avatar.png';
 
-        const newBlog = await prisma.blog.create({
-            data: {
-                title,
-                excerpt,
-                body,
-                image: imageUrl,
-                owner: userId,
-            }
-        });
+//         const newBlog = await prisma.blog.create({
+//             data: {
+//                 title,
+//                 excerpt,
+//                 body,
+//                 image: imageUrl,
+//                 owner: userId,
+//             }
+//         });
 
-        res.status(201).json(newBlog);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: error.message});
-    }
-}
-
-
-
-export async function fetchingSingleBlog(req, res) {
-    try {
-        const { id } = req.params;
-
-        const blog = await prisma.blog.findFirst({
-            where: {
-                id
-            },
-            include: {
-                user: true 
-            }
-        });
-
-        if (!blog) {
-            return res.status(404).json({ message: "Blog not found" });
-        }
-
-        res.status(200).json(blog);
-    } catch (e) {
-        console.error("Error fetching blog:", e);
-        res.status(500).json({ message: "Something went wrong" });
-    }
-}
+//         res.status(201).json(newBlog);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: error.message});
+//     }
+// }
 
 
-export async function fetchingAllBlogs(req, res) {
-    try{
-        const blogs = await prisma.blog.findMany({
-            include: {
-                user: true 
-            }
-        });
-        res.status(200).json(blogs);
-    }catch(e){
-        res.status(500).json({ message: "Something went wrong" });
-    }
-}
 
-export async function getUserBlogs(req, res){
-    try{
-        const userId = req.userId;
-        const userBlogs = await prisma.blog.findMany({
-            where: {
-                owner: userId
-            },
-            include: {
-                user: true 
-            }
-        });
-        res.status(200).json(userBlogs);
-    }catch(e){
-        res.status(400).json({ message: "Something went wrong please try again"})
-    }
-}
+// export async function fetchingSingleBlog(req, res) {
+//     try {
+//         const { id } = req.params;
 
-// delete blog
+//         const blog = await prisma.blog.findFirst({
+//             where: {
+//                 id
+//             },
+//             include: {
+//                 user: true 
+//             }
+//         });
 
-export async function deleteBlog(req, res) {
-    try {
-        const {blogId} = req.params;
-        const userId = req.userId;
+//         if (!blog) {
+//             return res.status(404).json({ message: "Blog not found" });
+//         }
 
-        await prisma.blog.delete({
-            where: {
-                id: blogId,
-                owner: userId
-            }
-        })
-        res.status(200).json({message: "Blog deleted successfully"});
-    }catch (e) {
-        res.status(500).json({ message: "Something went wrong" });
-    }
-}
+//         res.status(200).json(blog);
+//     } catch (e) {
+//         console.error("Error fetching blog:", e);
+//         res.status(500).json({ message: "Something went wrong" });
+//     }
+// }
 
-// update blog
-export async function updateBlog(req, res) {
-    try {
-        const { blogId } = req.params;
-        const { title, excerpt, body } = req.body;
-        const userId = req.userId;
-        const blog = await prisma.blog.update({
-            where: {
-                id: blogId,
-                owner: userId
-            },
-            data: {
-                title,
-                excerpt,
-                body
-            }
-        })
-        res.status(200).json(blog);
-    }catch (e) {
-      res.status(500).json({ message: "Something went wrong" });  
-    }                                                                                                                                               
-}
 
-// update personal information
-export async function updatePersonalInformation(req, res) {
-    try {
-        const { firstName, lastName, emailAddress, username } = req.body;
-        const userId = req.userId;
+// export async function fetchingAllBlogs(req, res) {
+//     try{
+//         const blogs = await prisma.blog.findMany({
+//             include: {
+//                 user: true 
+//             }
+//         });
+//         res.status(200).json(blogs);
+//     }catch(e){
+//         res.status(500).json({ message: "Something went wrong" });
+//     }
+// }
+// // 
+// export async function getUserBlogs(req, res){
+//     try{
+//         const userId = req.userId;
+//         const userBlogs = await prisma.blog.findMany({
+//             where: {
+//                 owner: userId
+//             },
+//             include: {
+//                 user: true 
+//             }
+//         });
+//         res.status(200).json(userBlogs);
+//     }catch(e){
+//         res.status(400).json({ message: "Something went wrong please try again"})
+//     }
+// }
 
-        const user = await prisma.user.update({
-            where: { id: userId },
-            data: {
-                firstName,
-                lastName,
-                emailAddress,
-                username
-            }
-        });
+// // delete blog
 
-        res.status(200).json(user);
-    } catch (e) {
-        console.error("Error updating user information:", e.message, e.stack);
-        res.status(500).json({ message: "Something went wrong" });
-    }
-}
+// export async function deleteBlog(req, res) {
+//     try {
+//         const {blogId} = req.params;
+//         const userId = req.userId;
 
-// create profile
-export async function createProfile(req, res) {
-    try {
-        const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
+//         await prisma.blog.delete({
+//             where: {
+//                 id: blogId,
+//                 owner: userId
+//             }
+//         })
+//         res.status(200).json({message: "Blog deleted successfully"});
+//     }catch (e) {
+//         res.status(500).json({ message: "Something went wrong" });
+//     }
+// }
 
-        // Validate required fields
-        if (!phoneNumber) return res.status(400).json({ message: "phoneNumber is required" });
-        if (!occupation) return res.status(400).json({ message: "occupation is required" });
-        if (!bio) return res.status(400).json({ message: "Bio is required" });
-        if (!secondaryEmail) return res.status(400).json({ message: "secondaryEmail is required" });
+// // update blog
+// export async function updateBlog(req, res) {
+//     try {
+//         const { blogId } = req.params;
+//         const { title, excerpt, body } = req.body;
+//         const userId = req.userId;
+//         const blog = await prisma.blog.update({
+//             where: {
+//                 id: blogId,
+//                 owner: userId
+//             },
+//             data: {
+//                 title,
+//                 excerpt,
+//                 body
+//             }
+//         })
+//         res.status(200).json(blog);
+//     }catch (e) {
+//       res.status(500).json({ message: "Something went wrong" });  
+//     }                                                                                                                                               
+// }
 
-        // Check if the user is authenticated
-        const userId = req.userId;
-        if (!userId) return res.status(401).json({ message: "User not authenticated" });
+// // update personal information
+// export async function updatePersonalInformation(req, res) {
+//     try {
+//         const { firstName, lastName, emailAddress, username } = req.body;
+//         const userId = req.userId;
 
-        // Ensure the secondaryEmail is unique across all profiles
-        const existingProfileWithSecondaryEmail = await prisma.profile.findUnique({
-            where: { secondaryEmail },
-        });
-        if (existingProfileWithSecondaryEmail) {
-            return res.status(409).json({ message: "Secondary email has already been taken" });
-        }
+//         const user = await prisma.user.update({
+//             where: { id: userId },
+//             data: {
+//                 firstName,
+//                 lastName,
+//                 emailAddress,
+//                 username
+//             }
+//         });
 
-        // Use a default avatar if no image is provided
-        const imageUrl = profileImage || 'https://example.com/default-avatar.png';
+//         res.status(200).json(user);
+//     } catch (e) {
+//         console.error("Error updating user information:", e.message, e.stack);
+//         res.status(500).json({ message: "Something went wrong" });
+//     }
+// }
 
-        // Create a new profile in the database
-        const newProfile = await prisma.profile.create({
-            data: {
-                phoneNumber,
-                occupation,
-                bio,
-                secondaryEmail,
-                profileImage: imageUrl,
-                user: {
-                    connect: { id: userId }  // Ensure this connects the profile to the authenticated user
-                }
-            },
-        });
+// // create profile
+// export async function createProfile(req, res) {
+//     try {
+//         const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
 
-        res.status(201).json(newProfile);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: error.message });
-    }
-}
+//         // Validate required fields
+//         if (!phoneNumber) return res.status(400).json({ message: "phoneNumber is required" });
+//         if (!occupation) return res.status(400).json({ message: "occupation is required" });
+//         if (!bio) return res.status(400).json({ message: "Bio is required" });
+//         if (!secondaryEmail) return res.status(400).json({ message: "secondaryEmail is required" });
 
-// Getting profile for  logged in user
-export  async function  getUserProfie(req, res) {
-    try {
-        const userId = req.userId;  // Assuming verifyToken sets req.userId
+//         // Check if the user is authenticated
+//         const userId = req.userId;
+//         if (!userId) return res.status(401).json({ message: "User not authenticated" });
 
-        // Fetch profile based on the authenticated user's ID
-        const profile = await prisma.profile.findUnique({
-            where: { userId },
-        });
+//         // Ensure the secondaryEmail is unique across all profiles
+//         const existingProfileWithSecondaryEmail = await prisma.profile.findUnique({
+//             where: { secondaryEmail },
+//         });
+//         if (existingProfileWithSecondaryEmail) {
+//             return res.status(409).json({ message: "Secondary email has already been taken" });
+//         }
 
-        if (!profile) {
-            return res.status(404).json({ message: "Profile not found" });
-        }
+//         // Use a default avatar if no image is provided
+//         const imageUrl = profileImage || 'https://example.com/default-avatar.png';
 
-        res.status(200).json(profile);
-    } catch (error) {
-        console.error("Error fetching profile:", error);
-        res.status(500).json({ message: "An error occurred while fetching the profile." });
-    }
-};
+//         // Create a new profile in the database
+//         const newProfile = await prisma.profile.create({
+//             data: {
+//                 phoneNumber,
+//                 occupation,
+//                 bio,
+//                 secondaryEmail,
+//                 profileImage: imageUrl,
+//                 user: {
+//                     connect: { id: userId }  // Ensure this connects the profile to the authenticated user
+//                 }
+//             },
+//         });
 
-// update profile
-export async function updateProfile(req, res) {
-    try {
-        const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
-        const userId = req.userId;
+//         res.status(201).json(newProfile);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: error.message });
+//     }
+// }
 
-        // Ensure the user is authenticated
-        if (!userId) return res.status(401).json({ message: "User not authenticated" });
+// // Getting profile for  logged in user
+// export  async function  getUserProfie(req, res) {
+//     try {
+//         const userId = req.userId;  // Assuming verifyToken sets req.userId
 
-        // Get the current profile
-        const currentProfile = await prisma.profile.findUnique({
-            where: { userId }
-        });
+//         // Fetch profile based on the authenticated user's ID
+//         const profile = await prisma.profile.findUnique({
+//             where: { userId },
+//         });
 
-        // Check if secondaryEmail is being updated
-        if (secondaryEmail && secondaryEmail !== currentProfile.secondaryEmail) {
-            // Check if the new secondaryEmail already exists in the system
-            const existingProfileWithSecondaryEmail = await prisma.profile.findUnique({
-                where: { secondaryEmail },
-            });
+//         if (!profile) {
+//             return res.status(404).json({ message: "Profile not found" });
+//         }
 
-            if (existingProfileWithSecondaryEmail) {
-                return res.status(409).json({ message: "Secondary email has already been taken" });
-            }
-        }
+//         res.status(200).json(profile);
+//     } catch (error) {
+//         console.error("Error fetching profile:", error);
+//         res.status(500).json({ message: "An error occurred while fetching the profile." });
+//     }
+// };
 
-        // Use a default avatar if no image is provided
-        const imageUrl = profileImage || currentProfile.profileImage || 'https://example.com/default-avatar.png';
+// // update profile
+// export async function updateProfile(req, res) {
+//     try {
+//         const { phoneNumber, occupation, bio, secondaryEmail, profileImage } = req.body;
+//         const userId = req.userId;
 
-        // Update the profile
-        const updatedProfile = await prisma.profile.update({
-            where: { userId },
-            data: {
-                phoneNumber,
-                occupation,
-                bio,
-                secondaryEmail: secondaryEmail || currentProfile.secondaryEmail, // Only update if provided
-                profileImage: imageUrl,
-            },
-        });
+//         // Ensure the user is authenticated
+//         if (!userId) return res.status(401).json({ message: "User not authenticated" });
 
-        res.status(200).json(updatedProfile);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: error.message });
-    }
-}
+//         // Get the current profile
+//         const currentProfile = await prisma.profile.findUnique({
+//             where: { userId }
+//         });
+
+//         // Check if secondaryEmail is being updated
+//         if (secondaryEmail && secondaryEmail !== currentProfile.secondaryEmail) {
+//             // Check if the new secondaryEmail already exists in the system
+//             const existingProfileWithSecondaryEmail = await prisma.profile.findUnique({
+//                 where: { secondaryEmail },
+//             });
+
+//             if (existingProfileWithSecondaryEmail) {
+//                 return res.status(409).json({ message: "Secondary email has already been taken" });
+//             }
+//         }
+
+//         // Use a default avatar if no image is provided
+//         const imageUrl = profileImage || currentProfile.profileImage || 'https://example.com/default-avatar.png';
+
+//         // Update the profile
+//         const updatedProfile = await prisma.profile.update({
+//             where: { userId },
+//             data: {
+//                 phoneNumber,
+//                 occupation,
+//                 bio,
+//                 secondaryEmail: secondaryEmail || currentProfile.secondaryEmail, // Only update if provided
+//                 profileImage: imageUrl,
+//             },
+//         });
+
+//         res.status(200).json(updatedProfile);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: error.message });
+//     }
+// }
+
+
+// export async function fetchProfileImage (req, res) {
+//     const { userId } = req.params;
+
+//   try {
+//     // Fetch the profile data based on the userId
+//     const profile = await prisma.profile.findUnique({
+//       where: { userId: userId },
+//       select: { profileImage: true },
+//     });
+
+//     if (profile) {
+//       return res.json(profile);
+//     } else {
+//       return res.status(404).json({ message: 'Profile not found' });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// };
